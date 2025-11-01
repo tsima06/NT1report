@@ -7,6 +7,7 @@
     body {font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial; max-width:900px;margin:2rem auto;padding:1rem;line-height:1.6;color:#111}
     header {background-color: #fde245;}
     h1 {text-align:center;}
+    h3 {text-align:center; font-size: 25px;}
     table{border-collapse:collapse;width:100%;}
     th,td{border:1px solid #ddd;padding:5px;text-align:left}
     th{background:#fde245}
@@ -22,13 +23,13 @@
   <h2>1. ISO/OSI Model Description</h2>
   <p>The OSI model includes seven layers: physical, data link, network, transport, session, presentation, and application. Each layer completes specific tasks and protocols: </p>
   <ol>
-    <li><strong>Physical</strong> — using physical hardware like electrical, procedural, or mechanical interfaces, this layer transmits data physically through cables and channels.</li>
-    <li><strong>Data Link</strong> — creates links between device connection points for data transfer. This layer is responsible for detecting data errors, correcting them, managing the data flow between devices, as well as organizing data bits into frames that can be sent to the network layer.</li>
-    <li><strong>Network</strong> — divides, routes, and reassembles data packets to and from networks to deliver data to the proper networks. Routing, addressing, and forwarding data packets are all components of the network layer, as well as controlling data flow. </li>
-    <li><strong>Transport</strong> —  provides end-to-end delivery of data. This layer is responsible for adding the port number to the data and providing identification for applications and client-side entities, as well as confirming that the packets arrive intact.</li>
-    <li><strong>Session</strong> — establishes, maintains, and ends application connections. The session layer synchronizes the exchange of data between different systems, allowing devices to transmit signals between one another. </li>
-    <li><strong>Presentation</strong> — this layer converts data into a format suited to the application that receives it. This often involves translation, compression, conversion, encryption, and decryption.</li>
-    <li><strong>Application</strong> —  creates an interface between the user and the rest of the network services. This layer is also responsible for network-specific services, including email, file transfers, web browsing, and accessing other network resources.</li>
+    <li><strong>Physical</strong> - using physical hardware like electrical, procedural, or mechanical interfaces, this layer transmits data physically through cables and channels.</li>
+    <li><strong>Data Link</strong> - creates links between device connection points for data transfer. This layer is responsible for detecting data errors, correcting them, managing the data flow between devices, as well as organizing data bits into frames that can be sent to the network layer.</li>
+    <li><strong>Network</strong> - divides, routes, and reassembles data packets to and from networks to deliver data to the proper networks. Routing, addressing, and forwarding data packets are all components of the network layer, as well as controlling data flow. </li>
+    <li><strong>Transport</strong> -  provides end-to-end delivery of data. This layer is responsible for adding the port number to the data and providing identification for applications and client-side entities, as well as confirming that the packets arrive intact.</li>
+    <li><strong>Session</strong> - establishes, maintains, and ends application connections. The session layer synchronizes the exchange of data between different systems, allowing devices to transmit signals between one another. </li>
+    <li><strong>Presentation</strong> - this layer converts data into a format suited to the application that receives it. This often involves translation, compression, conversion, encryption, and decryption.</li>
+    <li><strong>Application</strong> -  creates an interface between the user and the rest of the network services. This layer is also responsible for network-specific services, including email, file transfers, web browsing, and accessing other network resources.</li>
   </ol>
 
   <h2>2. Protocol Data Units (PDUs)</h2>
@@ -49,33 +50,97 @@
     <tr><td>3.Network</td><td>ICMP, IGMP, IPv4 / IPv6, L2TP</td></tr>
     <tr><td>4.Transport</td><td>RTP, TCP, UDP</td></tr>
     <tr><td>5.Session</td><td>NetBIOS, RTP, SIP</td></tr>
-    <tr><td>6.resentation</td><td>MIME, NetBIOS, SIP, SSL / TLS</td></tr>
+    <tr><td>6.Presentation</td><td>MIME, NetBIOS, SIP, SSL / TLS</td></tr>
     <tr><td>7.Application</td><td>DHCP, DNS, FTP, HTTP, NetBIOS, NNTP, SIP, Telnet</td></tr>
   </table>
   <h1>Part 2.</h1>
 
-  <section id="ping-analysis">
+  <section id="2.1">
   <h2>1. Ping Connectivity Test and Wireshark Analysis</h2>
   <p>
     To verify network connectivity and analyze the communication stack, the <code>ping google.com</code> command was used to contact <strong>google.com</strong>. 
-    Simultaneously, Wireshark captured all related packets for protocol identification and classification according to the ISO/OSI model.
+    Simultaneously, Wireshark captured all related packets for protocol identification and classification according to the ISO/OSI model. 
+    Using Wireshark filters I identified 5 following protocols:
   </p>
 
-  <h3>Observed Protocols</h3>
   <table>
     <thead><tr><th>Protocol</th><th>Function</th><th>OSI Layer</th></tr></thead>
     <tbody>
-      <tr><td><strong>Ethernet II</strong></td><td>Encapsulation of network packets into frames with MAC addressing</td><td>2 — Data Link</td></tr>
-      <tr><td><strong>IPv4</strong></td><td>Provides logical addressing and routing</td><td>3 — Network</td></tr>
-      <tr><td><strong>ICMP</strong></td><td>Used for diagnostics and connectivity verification (Echo Request/Reply)</td><td>3 — Network</td></tr>
-      <tr><td><strong>UDP</strong></td><td>Transport protocol used by DNS queries</td><td>4 — Transport</td></tr>
-      <tr><td><strong>DNS</strong></td><td>Resolves domain name google.com to its IP address</td><td>7 — Application</td></tr>
-      <tr><td><strong>TCP</strong></td><td></td><td>4 — Transport</td></tr>
-      <tr><td><strong>Physical Layer</strong></td><td>Transmission of bits over cable or radio (Ethernet or Wi-Fi)</td><td>1 — Physical</td></tr>
+      <tr><td><strong>Ethernet II</strong></td><td>Encapsulation of network packets into frames with MAC addressing</td><td>2 - Data Link</td></tr>
+      <tr><td><strong>IPv4</strong></td><td>Provides logical addressing and routing</td><td>3 - Network</td></tr>
+      <tr><td><strong>ICMP</strong></td><td>Used for diagnostics and connectivity verification (Echo Request/Reply)</td><td>3 - Network</td></tr>
+      <tr><td><strong>UDP</strong></td><td>Transport protocol used by DNS queries</td><td>4 - Transport</td></tr>
+      <tr><td><strong>DNS</strong></td><td>Resolves domain name <code>google.com</code> to its IP address</td><td>7 - Application</td></tr>
     </tbody>
   </table>
-</section>
+  </section>
 
+  <section id="2.2">
+    <h2>2. Uploading image to the server using SCP protocol</h2>
+    <p>
+      SCP (Secure Copy Protocol) is a network protocol used for secure file transfers between a local and remote computer, or between two remote computers, over the internet.
+       To accomplish the transfer of the image to the remote server <code>studife.it.p.lodz.pl</code> I used the following command <code>scp image.png UserID@studife.it.p.lodz.pl:~</code>.
+        Utilizing wireshark I captured the following protocols:
+    </p>
+    <table>
+      <thead><tr><th>Protocol</th><th>Function</th><th>OSI Layer</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Ethernet II</strong></td><td>Encapsulation of network packets into frames with MAC addressing</td><td>2 - Data Link</td></tr>
+      <tr><td><strong>IPv4</strong></td><td>Provides logical addressing and routing</td><td>3 - Network</td></tr>
+      <tr><td><strong>TCP</strong></td><td>Ensures reliable, ordered, and error-checked delivery of data</td><td>4 - Transport</td></tr>
+      <tr><td><strong>SSH</strong></td><td>Incorporates encryption and authentication via a process called public key cryptography</td><td>7 - Application</td></tr>
+      <tr><td><strong>SCP</strong></td><td>Security and authentication</td><td>7 - Application</td></tr>
+    </tbody>
+    </table>
+  </section>
+
+  <section id="2.3">
+  <h2>3. Accessing it.p.lodz.pl - Protocol Analysis</h2>
+  <p>
+    The webpage <code>it.p.lodz.pl</code> was accessed using a web browser while capturing traffic with Wireshark.
+    The captured communication involved several protocols across different OSI layers:
+  </p>
+  <table>
+    <thead><tr><th>Protocol</th><th>Function</th><th>OSI Layer</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Ethernet II</strong></td><td>Encapsulation of network packets into frames with MAC addressing</td><td>2 - Data Link</td></tr>
+      <tr><td><strong>IPv4</strong></td><td>Provides logical addressing and routing</td><td>3 - Network</td></tr>
+      <tr><td><strong>UDP</strong></td><td>Ensures reliable, ordered, and error-checked delivery of data</td><td>4 - Transport</td></tr>
+      <tr><td><strong>TCP</strong></td><td>Transport layer protocol designed to be faster and more secure than TCP</td><td>4 - Transport</td></tr>
+      <tr><td><strong>TLSv1.3</strong></td><td>Provides secure communication over a network by encrypting data</td><td>5 - Session</td></tr>
+      <tr><td><strong>DNS</strong></td><td>Resolves domain name <code>it.p.lodz.pl</code> to its IP address</td><td>7 - Application</td></tr>
+    </tbody>
+  </table>
+  </section>
+
+  <section id="2.4">
+  <h2>4. Accessing studife.it.p.lodz.pl - Protocol Analysis</h2>
+  <p>
+    The webpage <code>studife.it.p.lodz.pl</code> was accessed using a web browser 
+    while capturing the network traffic with Wireshark. 
+    The communication involved the following protocols, which correspond 
+    to different layers of the ISO/OSI reference model:
+  </p>
+  <table>
+    <thead>
+      <tr><th>Protocol</th><th>Function</th><th>OSI Layer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Ethernet II</strong></td><td>Frame encapsulation for data transmission within the local network</td><td>2 - Data Link</td></tr>
+      <tr><td><strong>IPv4</strong></td><td>Provides logical addressing and routing of packets</td><td>3 - Network</td></tr>
+      <tr><td><strong>TCP</strong></td><td>Ensures reliable, ordered data delivery between client and server (port 80)</td><td>4 - Transport</td></tr>
+      <tr><td><strong>DNS</strong></td><td>Translates the hostname studife.it.p.lodz.pl into its IP address</td><td>7 - Application</td></tr>
+      <tr><td><strong>HTTP/1.1</strong></td><td>Application protocol for web page request and response</td><td>7 - Application</td></tr>
+    </tbody>
+  </table>
+  </section>
+
+  <h3>Conclusion</h3>
+  <p>Capturing live traffic, it allows observation of the complete communication process - 
+    from DNS resolution and TCP handshakes to HTTP or HTTPS data exchange. 
+    This analysis demonstrates how multiple layers of the ISO/OSI model interact during a simple web access, 
+    providing valuable insight into how data travels across the network and how different protocols cooperate to ensure reliable and secure communication.
+  </p>
 
   <footer><p>Tsimafei Kazlou 253846</p></footer>
 </body>
